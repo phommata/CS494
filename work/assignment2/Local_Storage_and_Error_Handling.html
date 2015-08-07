@@ -1,0 +1,83 @@
+<!DOCTYPE html> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+		<title>localStorage example</title>
+<!--        <link rel="stylesheet" href="Local_Storage_and_Error_Handling.css" type="text/css"> -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+		<script src="jquery-1.11.0.min.js"></script> 
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function() { 
+				if (!window["localStorage"]) {
+					alert("Local storage is disabled on the client."); 
+				} 
+ 				else {
+ 					var currentStringLS = localStorage["stringLS"];
+					localStorage["stringLS"] = currentStringLS; 
+ 				} // end of if-else
+			}); // end of ready
+		</script> 
+
+		<script> 
+			function save() {
+				localStorage["stringLS"] = $("#strInput").val();
+				return false;
+			}
+			
+			function clearStorage(){
+				localStorage["stringLS"] = "";
+				// localStorage.removeItem("stringLS");
+				// localStorage.clear();
+				return false;
+			}
+			
+			function prependLS(){
+				localStorage["stringLS"] = ( $("#strInput").val() + localStorage["stringLS"] );
+				return false;
+			}
+			
+			function appendLS(){
+				localStorage["stringLS"] = ( localStorage["stringLS"] + $("#strInput").val() );
+				return false;
+			}
+			
+			function display() {
+				$("#output").text(localStorage["stringLS"]);
+				return false;
+			}
+		</script>
+	</head> 
+	<body role="document">
+        <div class="container">
+            <form id="frm">
+                <div class="form-group">
+                    <div class="text">
+                        <label for="strInput"><h4>Please enter a string:</h4></label>
+                        <input type="text" class="required" name="strInput" id="strInput">
+                        <BR> 
+                    </div>
+                    <div class="buttons">
+                        <input type="submit" id="saveString" value="Save String" onclick="return save()" class="btn btn-default"><BR>
+                        <input type="submit" id="clearString" value="Clear String" onclick="return clearStorage()" class="btn btn-default"><BR>
+                        <input type="submit" id="prepend" value="Prepend" onclick="return prependLS()" class="btn btn-default"><BR>
+                        <input type="submit" id="append" value="Append" onclick="return appendLS()" class="btn btn-default"><BR>
+                        <input type="submit" id="displayString" value="Display String" onclick="return display()" class="btn btn-default"><BR>
+                    </div>
+                    <div id="table"></div><BR>	
+                </div> 
+            </form> 
+            <span class="text">
+                <div><h4>Output: </h4></div>
+                <div id="output"></div> 
+            </span>
+        </div>  <!--end of container-->         
+	</body>
+</html>

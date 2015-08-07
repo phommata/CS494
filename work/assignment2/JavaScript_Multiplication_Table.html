@@ -1,0 +1,133 @@
+<!DOCTYPE html> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--		<link href="Basic_Ajax_and_Error_Handling.css" rel="stylesheet" type="text/css"> -->
+<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        
+		<script src="jquery-1.11.0.min.js"></script> 
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<title>JavaScript Multiplication</title>
+  <!--		<link rel="stylesheet" href="JavaScript_Multiplication_Table.css" type="text/css">-->					
+		<script src="jquery.validate.min.js"></script> 
+		<script>
+		$(document).ready(function() { 
+			$("#frm").validate({			
+				rules: {
+					X: {
+						required: true,
+						min: 0,
+						max: 100
+					},
+					Y: {
+						required: true,
+						range: [0, 100],
+					}
+				}, // end of rules
+				messages: {
+					X: { 
+						required: "Please enter a multiplier.",
+						min: "Please enter between 0 and 99.",
+						max: "Please enter between 0 and 99."
+					},
+					Y: { 
+						required: "Please enter a greater multiplicand.",
+						range: "Please enter between X and 99."
+					}
+				}	// end of messages					
+			}); // end of validate 		
+		}); // end of ready
+
+		</script>
+	</head> 
+    <body role="document">
+        <div class="container">
+            <h2>JavaScript Multiplication</h2>
+            <form id="frm" onsubmit="return isValid()">
+                <div class="form-group">               
+                    <div>
+                        <label for="X">Please enter a multiplier X:</label>
+                        <input type="text" class="required" name="X" id="X">
+                        <BR> 
+                    </div>
+                    <div>
+                        <label for="Y">Please enter a greater multiplicand Y: </label>
+                        <input type="text" class="required" name="Y" id="Y"><BR> 		
+                    </div>
+                    <div>
+                        <input type="submit" value="Generate table" class="btn btn-default">
+                    </div>
+                </div>                
+                <div id="table"></div><BR>	
+            </form> 
+            <script type="text/javascript">
+                function isValid() {
+                    var xValue = document.getElementById("X").value;
+                    var yValue = document.getElementById("Y").value;
+                    var lengthOf2Darray = (yValue - xValue);				
+                    
+                    console.log("x: ", xValue);
+                    if (xValue > yValue)
+                        alert("Error: X is greater than Y.")
+                    else if (xValue <= yValue)
+                    {
+                        var twoDarray = new Array(lengthOf2Darray);
+    
+                        /* Draw out the multiplication table. */
+                        function gen2Darray(min, max)
+                        {
+                            for (var i = 0; i <= lengthOf2Darray; i++)
+                            {
+                                twoDarray[i] = new Array(lengthOf2Darray);
+                                for (var j = 0; j <= lengthOf2Darray; j++)
+                                {
+                                    twoDarray[i][j] = ((parseInt(min) + i) * (parseInt(min) + j));							 
+                                }
+                            }
+                        }	
+                        gen2Darray(xValue, yValue);	
+                                                  
+                        function print_2d_string_array (array)
+                        {
+                            var table = $("<table class='table table-striped table-bordered'></table>");
+                            var topRow = $("<tr></tr>");
+                            topRow.append("<td></td>");
+                            for (i = 0; i < array.length; i++)
+                            {
+                                topRow.append("<td>" + (parseInt(xValue) + i) + "</td>");
+                            }
+                            table.append(topRow);
+    
+                            for(i = 0; i < array.length; i++)
+                            {
+                                var bodyRows = $("<tr></tr>");
+                                bodyRows.append("<td>" + (parseInt(xValue) + i) + "</td>");
+    
+                                for (j = 0; j < array.length; j++)
+                                {
+                                  bodyRows.append("<td>" + array[i][j] + "</td>");
+                                }
+    
+                                table.append(bodyRows);
+    
+                            }
+                            $("#table").append(table);
+                        }
+                        print_2d_string_array(twoDarray);
+                        
+                        return false;
+                    }
+    // 				else if (xValue > yValue)
+    // 					alert("Error: X is greater than Y.")
+                }
+            </script>	
+        </div>  <!--end of container-->         
+	</body>
+</html>

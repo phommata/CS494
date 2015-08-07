@@ -1,0 +1,32 @@
+h2, h3, body, li, th, td  {
+	color: #0066FF;
+	font-family: Verdana, Geneva, sans-serif;
+}
+body {
+	background-color: #FFFFFF;
+}
+ul { list-style: none; }
+li:hover 
+{
+	color: maroon;
+	background-color: #ffd9d9;
+}
+table, th, td {
+	padding: 6px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+td.c1 { background-color: #C0C0C0; }
+a:link {
+	display: block;
+	font-weight: bold;
+	color: #3366CC;
+	background-color: #FF704D;
+	width: 120px;
+	text-align: center;
+	padding: 4px;
+	text-decoration: none;
+}
+a:hover, a:active {
+	background-color: #B24E36;
+}

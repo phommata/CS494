@@ -1,0 +1,49 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <title>Book-Off - New Book Order</title>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+    <!--    <link rel="stylesheet" href="new_book_orders.css" type="text/css">-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body role="document">
+  <div class="container">
+    <h1>Book-Off - New Book Order</h1>
+    <form action="insert_book_orders.php" method="post" id="form-container">
+      <div class="form-group">
+        <table>
+          <tr>
+            <td>Author</td>
+            <td> <input type="text" name="author" maxlength="30" size="30"></td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td> <input type="text" name="title" maxlength="60" size="30"></td>
+          </tr>
+          <tr>
+            <td>Quantity</td>
+            <td><input type="text" name="quantity" maxlength="7" size="7"></td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="submit" value="Enter Order"></td>
+          </tr>
+        </table>
+      </div>
+    </form>
+  </div> <!-- end of container -->
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Basic AJAX and Error Handling</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--		<link href="Basic_AJAX_and_Error_Handling.css" rel="stylesheet" type="text/css"> -->
+<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+		<script src = "jquery-1.11.0.min.js"></script>
+  
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src = "jquery.validate.min.js"></script>
+		<script>
+			function isValid(frm){
+				$("#otherPageContent").hide();
+				$("#frm").validate();
+			
+				var dropDownSelected = $("#frm :selected").val();
+
+				if (dropDownSelected == "e")
+				{
+					var txt = ($(this).text());
+
+					$.ajax({url:"eagle_scout.json", 
+						data:{coursename:txt}, 
+						type:"GET", 
+						dataType:"json",
+						success:fnsuccess, 
+						error: function(xhr, status, error){
+							$("#infohere").text("The requested page was: " + xhr + 
+								". The error number returned was: " + xhr.status + 
+								". The error message was: " + error);
+							$("#otherPageContent").show();
+						}
+					}); // end of ajax										
+				} // end of if 404
+			
+				if (dropDownSelected == "g")
+				{
+					var txt = ($(this).text());
+
+					$.ajax({url:"girl_scout_cookies.json", 
+						data:{coursename:txt}, 
+						type:"GET", 
+						dataType:"json",
+						success:fnsuccess, 
+						error: function(xhr, status, error){
+							$("#infohere").text("The requested page was: " + xhr + 
+								". The error number returned was: " + xhr.status + 
+								". The error message was: " + error);
+							$("#otherPageContent").show();
+						}
+					}); // end of ajax										
+				} // end of if 404
+
+				if (dropDownSelected == "404")
+				{
+					var txt = ($(this).text());
+
+					$.ajax({url:"404_error.json", 
+						data:{coursename:txt}, 
+						type:"GET", 
+						dataType:"json",
+						success:fnsuccess, 
+						error: function(xhr, status, error){
+							$("#infohere").text("The requested page was: http://web.engr.oregonstate.edu/~phommata/Assignment2/404_error.json" + 
+								". The error number returned was: " + xhr.status + 
+								". The error message was: " + error);
+							$("#otherPageContent").show();
+						}
+					}); // end of ajax										
+				} // end of if 404
+			
+				if (dropDownSelected == "403")
+				{
+					var txt = ($(this).text());
+
+					$.ajax({url:"403_error.json", 
+						data:{coursename:txt}, 
+						type:"GET", 
+						dataType:"json",
+						success:fnsuccess, 
+						error: function(xhr, status, error){
+							$("#infohere").text("The requested page was: http://web.engr.oregonstate.edu/~phommata/Assignment2/403_error.json" + 
+								". The error number returned was: " + xhr.status + 
+								". The error message was: " + error);
+							$("#otherPageContent").show();
+						}
+					}); // end of ajax										
+				} // end of if 403
+							
+				function fnsuccess(serverReply) {
+					if (serverReply && serverReply.info) {
+						$("#infohere").text(serverReply.info);
+						$("#otherPageContent").show();
+					} 
+				}
+				return false;	// pause message on screen
+			}
+		</script>
+	</head>
+	<body role="document">
+        <div class="container">
+            <div id="heading"><h1>Basic AJAX</h1></div>        
+            <h5>Select from the dropdown</h5>
+            <form method="post" id="frm" onsubmit="return isValid(this)" role="form">
+                <div class="form-group">               
+                     <Select name="choice" class="form-control"> Choice
+                          <option id ="404" value="404">404 error </option>			
+                          <option id ="403" value="403">403 error </option>			
+                          <option id ="e"   value="e">Eagle Scouts </option>
+                          <option id ="g"   value="g">Girl Scout Cookies </option>				
+                     </select>
+                     <input type="submit" value="Display" class="btn btn-default">
+                </div>
+            </form>
+            <div id="otherPageContent">
+                <div class="page-header">
+                	<h3>Other Page Content</h3>
+                </div>
+                <div id="infohere"></div>
+            </div>
+        </div> <!--end of container-->
+	</body>
+</html>
